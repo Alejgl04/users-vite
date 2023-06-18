@@ -10,8 +10,13 @@ const state = {
 
 const loadNextPage = async() => {
 
-  await loadUsers( state.currentPage + 1);
-  
+  const users = await loadUsers( state.currentPage + 1);
+
+  if ( users.length === 0 ) return;
+
+  state.currentPage += 1;
+  state.users = users;
+
 }
 
 const loadPreviousPage = async() => {
@@ -38,7 +43,7 @@ export default {
   onUserChanged,
   realodPage,
 
-  getUser: () => [...state.users],
+  getUsers: () => [...state.users],
   getCurrentPage: () => state.currentPage
 
 }
