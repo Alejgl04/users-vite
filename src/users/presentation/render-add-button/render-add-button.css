@@ -1,0 +1,15 @@
+
+.add-button {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: #000;
+  color: #fff;
+
+} 
+
+.add-button:hover {
+  box-shadow: 1px 1px 1px 10px rgba(0, 0, 0, 0.5);
+  transition: ease-in;
+  transform: translateY(-5px);  
+}
