@@ -22,6 +22,7 @@ const createTable = () => {
     </tr>`;
 
     const tableBody = document.createElement('tbody');
+    table.classList.add('table')
     table.append( tableHeaders, tableBody );
     return table;
 
