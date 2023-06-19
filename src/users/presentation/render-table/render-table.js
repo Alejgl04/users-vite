@@ -4,7 +4,6 @@ import usersStore from '../../store/users-store';
 import { User } from '../../models/users';
 
 let table;
-let tableHtml = '';
 
 const createTable = () => {
 
@@ -36,6 +35,8 @@ export const renderTable = ( element ) => {
     table = createTable();
     element.append( table );
   }
+
+  let tableHtml = '';
 
   users.forEach( user => {
     tableHtml += `

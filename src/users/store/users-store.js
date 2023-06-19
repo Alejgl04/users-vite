@@ -11,6 +11,7 @@ const state = {
 const loadNextPage = async() => {
 
   const users = await loadUsers( state.currentPage + 1);
+  console.log(users);
 
   if ( users.length === 0 ) return;
 
@@ -20,9 +21,12 @@ const loadNextPage = async() => {
 }
 
 const loadPreviousPage = async() => {
+  if( state.currentPage === 1 ) return;
 
-  throw new Error('Not implmenent');
+  const users = await loadUsers( state.currentPage - 1);
 
+  state.currentPage -=1;
+  state.users = users;
 }
 
 const onUserChanged = async() => {
