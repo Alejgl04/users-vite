@@ -12,13 +12,13 @@ document.querySelector('#app').innerHTML = `
       <img src="${javascriptLogo}" class="logo vanilla" alt="JavaScript logo" />
     </a>
     <h1>Hello Vite!</h1>
-    <div id="main" class="card">
+    <div id="mainContent" class="card">
 
     </div>
   </div>
 `;
 
-const element = document.querySelector('#main');
+const element = document.querySelector('#mainContent');
 
 UsersApp( element );
 

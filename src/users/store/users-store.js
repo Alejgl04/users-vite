@@ -43,6 +43,10 @@ export default {
   onUserChanged,
   realodPage,
 
+  /**
+   * 
+   * @returns {User[]}
+   */
   getUsers: () => [...state.users],
   getCurrentPage: () => state.currentPage
 
