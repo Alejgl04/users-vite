@@ -11,7 +11,6 @@ const state = {
 const loadNextPage = async() => {
 
   const users = await loadUsers( state.currentPage + 1);
-  console.log(users);
 
   if ( users.length === 0 ) return;
 

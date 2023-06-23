@@ -10,16 +10,18 @@ export const showModal = () => {
 }
 
 export const hideModal = () => {
-
+  
   modal?.classList.add('hide-modal');
+  form?.reset();
 
 }
 
 /**
  * 
  * @param {HTMLDivElement} element 
+ * @param {(userLike)=>PRomise<void>} callback
  */
-export const renderModal = ( element ) => {
+export const renderModal = ( element, callback ) => {
 
   if ( modal ) return;
 
@@ -38,10 +40,29 @@ export const renderModal = ( element ) => {
   
   });
   
-  form.addEventListener('submit', (event) => {
+  form.addEventListener('submit', async(event) => {
     
     event.preventDefault();
-    console.log(event);
+    const formData = new FormData(form);
+    const userLike = {};
+    for ( const [key, value] of formData ) {
+
+      if ( key === 'balance' ) {
+        userLike[key] = +value;
+        continue;     
+      }
+
+      if ( key === 'isActive' ) {
+        userLike[key] = ( value === 'on') ? true : false;
+        continue;
+      }
+      
+      userLike[key] = value;
+    }
+    
+    // console.log(userLike);
+    await callback(userLike)
+    hideModal();
   
   });
 
