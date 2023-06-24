@@ -1,3 +1,4 @@
+import { User } from "../models/users";
 import { loadUsers } from "../use-cases/load-users";
 
 
@@ -28,9 +29,25 @@ const loadPreviousPage = async() => {
   state.users = users;
 }
 
-const onUserChanged = async() => {
+/**
+ * 
+ * @param {User} updatedUser 
+ */
+const onUserChanged = async( updatedUser ) => {
 
-  throw new Error('Not implmenent');
+  let wasUserFound = false;
+
+  state.users = state.users.map( user => {
+    if ( user.id === updatedUser.id ) {
+      wasUserFound = true;
+      return updatedUser;
+    }
+    return user;
+  });
+
+  if ( state.users.length < 10 && !wasUserFound ) {
+    state.users.push( updatedUser );
+  }
   
 }
 
