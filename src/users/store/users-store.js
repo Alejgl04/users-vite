@@ -51,17 +51,22 @@ const onUserChanged = async( updatedUser ) => {
   
 }
 
-const realodPage = async() => {
+const reloadPage = async() => {
 
-  throw new Error('Not implmenent');
-  
+  const users = await loadUsers( state.currentPage );
+  if ( users.length === 0 ) {
+    await loadPreviousPage();
+    return;
+  }
+  state.users = users;
+
 }
 
 export default {
   loadNextPage,
   loadPreviousPage,
   onUserChanged,
-  realodPage,
+  reloadPage,
 
   /**
    * 

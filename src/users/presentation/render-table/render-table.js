@@ -1,9 +1,8 @@
 
 import './render-table.css';
 import usersStore from '../../store/users-store';
-import { User } from '../../models/users';
 import { showModal } from '../render-modal/render-modal';
-
+import { deteleUser } from '../../use-cases/delete-user-by-id'
 let table;
 
 const createTable = () => {
@@ -37,6 +36,25 @@ const tableSelectListener = ( event ) => {
   showModal( id );
 }
 
+
+const tableDeleteListener = async( event ) => {
+
+  const element = event.target.closest('.delete-user');
+  if ( !element ) return;
+
+  const id = await element.getAttribute('data-id');
+  try {
+    await deteleUser( id );
+    await usersStore.reloadPage();
+    document.querySelector('#current-page').innerText = usersStore.getCurrentPage();
+    renderTable();
+
+  } catch (error) {
+    console.log(error);
+    alert('Something went wrong..')
+  }
+}
+
 export const renderTable = ( element ) => {
 
   const users = usersStore.getUsers();
@@ -46,6 +64,7 @@ export const renderTable = ( element ) => {
     element.append( table );
 
     table.addEventListener('click', tableSelectListener );
+    table.addEventListener('click', tableDeleteListener );
   }
 
   let tableHtml = '';

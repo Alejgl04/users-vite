@@ -61,7 +61,6 @@ const updateUser = async ( user ) => {
     });
 
     const updateUser = await responseUser.json();
-    console.log(updateUser);
     return updateUser;
 
 }
